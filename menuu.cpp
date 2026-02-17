@@ -6,10 +6,10 @@ void stampaVettore(int vet[]);
 void inserimentoVoid();
 int TipoDiInserimento(int inserimento);
 
-//inserimenti senza sovrascrizione
+// inserimenti senza sovrascrizione
 int InsOrdinatoNO(int num, int vet[]);
 int insSceglimentoNO(int num, int vet[]);
-//inserimenti con sovrascrizione
+// inserimenti con sovrascrizione
 int insOrdinato(int num, int vet[]);
 int insSceglimento(int num, int vet[]);
 
@@ -21,306 +21,339 @@ void BubbleSort(int vet[]);
 
 void somma(int vet[]);
 
-int main(){
+int main()
+{
 
-    //richiedo il tipo di inserimento
+    // richiedo il tipo di inserimento
     int inserimento;
     inserimentoVoid();
-    inserimento = TipoDiInserimento(inserimento);
-    
-    //se non viene scelto un numero tra 1 e 2, l'inserimento non è valido e necessito di una nuova risposta
-    while(inserimento !=1 && inserimento !=2){
+    inserimento = TipoDiInserimento(inserimento); // <-- due funzioni che secondo me sono inutili, vedi nella parte delle funzioni perche
+
+    // se non viene scelto un numero tra 1 e 2, l'inserimento non è valido e necessito di una nuova risposta
+    while (inserimento != 1 && inserimento != 2)
+    { // <-- questo è ok, credo che ha piu senso fare lo switch case subito
 
         std::cout << "inserimento non valido, inserisci 1 o 2\n";
         inserimento = TipoDiInserimento(inserimento);
     }
 
-//riempio il vettore di 0, così da poter contare lo 0 come casella vuota
-int vet[100];
-for(int i = 0; i < 100; i++){
-    vet[i] = 0;
-} 
+    // riempio il vettore di 0, così da poter contare lo 0 come casella vuota
+    int vet[100]; // <-- ok ma inizia ad abituarti ad usare std::vector, ti risparmia un sacco di tempo
+    for (int i = 0; i < 100; i++)
+    {
+        vet[i] = 0;
+    }
 
-int num;
+    int num;
 
-//in base al tipo di inserimento, eseguo la funzione associata
-switch(inserimento){
+    // in base al tipo di inserimento, eseguo la funzione associata
+    switch (inserimento)
+    {
     case 1:
         insOrdinato(num, vet);
         break;
     case 2:
-        insSceglimento(num, vet);
+        insSceglimento(num, vet); // <-- vedi cosa ho scritto nella parte delle funzioni
         break;
-}
+    }
 
-//creo un ciclo per poter ritornare sempre alla lista di opzioni
-while(true){
-switch(opzioni(vet)){
-    case 1:
-        //stampo il vettore
-        stampaVettore(vet);
-        continue;
+    // creo un ciclo per poter ritornare sempre alla lista di opzioni
+    while (true)
+    {
+        switch (opzioni(vet)) // <-- non ho voglia di controllare tutti i case, comunque hai uno switch dentro un'altro switch e 99% ti portera a qualche bug
+        {
+        case 1:
+            // stampo il vettore
+            stampaVettore(vet);
+            continue;
 
+        case 2:
 
-    case 2:
-
-    //inserisco nuovi numeri (con sovrascrizione)
+            // inserisco nuovi numeri (con sovrascrizione)
             inserimentoVoid();
             inserimento = TipoDiInserimento(inserimento);
-    
-            while(inserimento !=1 && inserimento !=2){
+
+            while (inserimento != 1 && inserimento != 2)
+            {
 
                 std::cout << "inserimento non valido, inserisci 1 o 2\n";
                 inserimento = TipoDiInserimento(inserimento);
             }
-            switch(inserimento){
-                case 1:
-                    insOrdinato(num, vet);
-                    break;
-                case 2:
-                    insSceglimento(num, vet);
-                    break;
-                }
-        break;
+            switch (inserimento)
+            {
+            case 1:
+                insOrdinato(num, vet);
+                break;
+            case 2:
+                insSceglimento(num, vet);
+                break;
+            }
+            break;
 
+        case 3:
 
-
-    case 3:
-
-    //inserisco nuovi numeri (senza sovrascrizione)
+            // inserisco nuovi numeri (senza sovrascrizione)
             inserimentoVoid();
             inserimento = TipoDiInserimento(inserimento);
-    
-            while(inserimento !=1 && inserimento !=2){
+
+            while (inserimento != 1 && inserimento != 2)
+            {
 
                 std::cout << "inserimento non valido, inserisci 1 o 2\n";
                 inserimento = TipoDiInserimento(inserimento);
             }
-            switch(inserimento){
-                case 1:
-                    InsOrdinatoNO(num, vet);
-                    break;
-                case 2:
-                    insSceglimentoNO(num, vet);
-                    break;
-                }
-        break;
+            switch (inserimento)
+            {
+            case 1:
+                InsOrdinatoNO(num, vet);
+                break;
+            case 2:
+                insSceglimentoNO(num, vet);
+                break;
+            }
+            break;
 
+        case 4:
 
+            // elimino le caselle richieste
+            EliminaNumero(vet);
+            break;
+        case 5:
 
-    case 4:
-    
-    //elimino le caselle richieste
-        EliminaNumero(vet);
-        break;
-    case 5:
+            // calcolo la media dei numeri
+            Media(vet);
+            break;
+        case 6:
 
-    //calcolo la media dei numeri
-        Media(vet);
-        break;
-    case 6:
+            // riordino i numeri
+            BubbleSort(vet);
 
-    //riordino i numeri
-        BubbleSort(vet);
-        
-        std::cout << "\n questi sono i numeri in ordine:\n";
-        stampaVettore(vet);
-        break;
-    
-    case 7:
+            std::cout << "\n questi sono i numeri in ordine:\n";
+            stampaVettore(vet);
+            break;
 
-    //calcolo la somma
-        somma(vet);
-        break;
+        case 7:
 
-    default:
+            // calcolo la somma
+            somma(vet);
+            break;
 
-    //se vengono inseriti altri numeri ristampo la lista di opzioni
-    std::cout << "\nil numero he hai inserito non è associato a nessuna azione!\n";
-    break;
+        default:
+
+            // se vengono inseriti altri numeri ristampo la lista di opzioni
+            std::cout << "\nil numero he hai inserito non è associato a nessuna azione!\n";
+            break;
+        }
+    }
 }
-}
-}
 
+// FUNZIONI
 
-
-
-
-
-
-
-
-
-
-//FUNZIONI
-
-void inserimentoVoid(){
+void inserimentoVoid()
+{
+    // che senso ha questa funzione, non basta un cout normale?
     std::cout << "questo è un menu, come vuoi inserire i numeri? in ordine [1] o scegliendo la casella [2]?\n";
 }
-int TipoDiInserimento(int inserimento){
+// indem per questa, non ha molto senso creare delle funzioni di 2 righe, o fai una funzione di tutto o non farla
+int TipoDiInserimento(int inserimento)
+{
     std::cin >> inserimento;
     return inserimento;
 }
 
-int InsOrdinatoNO(int num, int vet[]){
+int InsOrdinatoNO(int num, int vet[])
+{
 
-    //controllo se la casella è vuota, in caso contrario, passo alla successiva
-    for(int i = 0; i < 100; i++){
-        if (vet[i] != 0){
+    // controllo se la casella è vuota, in caso contrario, passo alla successiva
+    for (int i = 0; i < 100; i++)
+    {
+        if (vet[i] != 0)
+        {
             continue;
         }
 
-        //richiedo un numero da inserire per la casella numero (i)
+        // richiedo un numero da inserire per la casella numero (i)
         std::cout << "inserisci un numero per la casella " << i << " (max 100), lettera per terminare\n";
 
-        //controllo se viene inserita una lettera o uno 0 --> lo 0 è proibito
-        if(!(std::cin >> num)){
+        // controllo se viene inserita una lettera o uno 0 --> lo 0 è proibito
+        if (!(std::cin >> num))
+        {
             std::cout << "esco dall'inserimento...\n \n";
             std::cin.clear();
             std::cin.ignore(100, '\n');
             return 0;
         }
-        if(num == 0){
+        if (num == 0)
+        {
             std::cout << "il numero 0 è proibito\n";
             i--;
             continue;
         }
-        
-        //confermo l'inserimento del numero nella corrispondende casella
-        else if(i != 99){
+
+        // confermo l'inserimento del numero nella corrispondende casella
+        else if (i != 99)
+        {
             vet[i] = num;
-        std::cout<< "hai inserito "<< num << " nella casella numero " << i << "\n";
-        }else{
-        std::cout << "hai riempito il vettore \n";
-        return 0;
-            }
+            std::cout << "hai inserito " << num << " nella casella numero " << i << "\n";
         }
+        else
+        {
+            std::cout << "hai riempito il vettore \n";
+            return 0;
+        }
+    }
 }
 
-int insSceglimentoNO(int num, int vet[]){
+int insSceglimentoNO(int num, int vet[])
+{
 
-    //richiedo una casella da riempire
-    for(int i=0; i < 100; i++){
+    // richiedo una casella da riempire
+    for (int i = 0; i < 100; i++)
+    {
         std::cout << "inserisci la casella in cui vuoi inserire il numero (max 100), lettera per terminare \n";
         int casella;
 
-        //controllo se viene inserita una lettera o se è stata inserita una casella invalida
-        if(!(std::cin >> casella)){
+        // controllo se viene inserita una lettera o se è stata inserita una casella invalida
+        if (!(std::cin >> casella))
+        {
             std::cout << "esco dall'inserimento...\n \n";
             std::cin.clear();
             std::cin.ignore(100, '\n');
             return 0;
-        }else if(vet[casella] != 0){
+        }
+        else if (vet[casella] != 0)
+        {
             std::cout << "casella già occupata, inserisci un numero tra 0 e 100\n";
             i--;
             continue;
-        }if(casella <0 || casella > 99){
+        }
+        if (casella < 0 || casella > 99)
+        {
             std::cout << "casella non valida, inserisci un numero tra 0 e 100\n";
             i--;
-            continue;}
-
-        //richiedo un numero da inserire nella casella selezionata
-        else{
-        std::cout << "inserisci il numero che vuoi inserire nella casella " << casella << "\n";
-
-        //controllo se viene inserita una lettera o uno 0 --> lo 0 è proibito
-        if(!(std::cin >> num)){
-            std::cout << "esco dall'inserimento...\n \n";
-            std::cin.clear();
-            std::cin.ignore(100, '\n');
-            return 0;
-        }
-        if(num == 0){
-            std::cout << "il numero 0 è proibito\n";
-            i--;
             continue;
         }
 
-        //confermo l'inserimento del numero nella corrispondende casella
-        vet[casella] = num;
-        std::cout << "hai inserito " << num << " nella casella numero " << casella << "\n";
+        // richiedo un numero da inserire nella casella selezionata
+        else
+        {
+            std::cout << "inserisci il numero che vuoi inserire nella casella " << casella << "\n";
+
+            // controllo se viene inserita una lettera o uno 0 --> lo 0 è proibito
+            if (!(std::cin >> num))
+            {
+                std::cout << "esco dall'inserimento...\n \n";
+                std::cin.clear();
+                std::cin.ignore(100, '\n');
+                return 0;
+            }
+            if (num == 0)
+            {
+                std::cout << "il numero 0 è proibito\n";
+                i--;
+                continue;
+            }
+
+            // confermo l'inserimento del numero nella corrispondende casella
+            vet[casella] = num;
+            std::cout << "hai inserito " << num << " nella casella numero " << casella << "\n";
         }
     }
 }
 
+int insOrdinato(int num, int vet[])
+{
 
-int insOrdinato(int num, int vet[]){
-
-    //richiedo un numero da inserire per la casella numero (i)
-    for(int i = 0; i < 100; i++){
+    // richiedo un numero da inserire per la casella numero (i)
+    for (int i = 0; i < 100; i++)
+    {
         std::cout << "inserisci un numero per la casella " << i << " (max 100), lettera per terminare\n";
 
-        //controllo se viene inserita una lettera o uno 0 --> lo 0 è proibito
-        if(!(std::cin >> num)){
+        // controllo se viene inserita una lettera o uno 0 --> lo 0 è proibito
+        if (!(std::cin >> num))
+        {
             std::cout << "esco dall'inserimento...\n \n";
             std::cin.clear();
             std::cin.ignore(100, '\n');
             return 0;
         }
-        if(num == 0){
+        if (num == 0)
+        {
             std::cout << "il numero 0 è proibito\n";
             i--;
             continue;
         }
-        
-        //confermo l'inserimento del numero nella corrispondende casella
-        else if(i != 99){
+
+        // confermo l'inserimento del numero nella corrispondende casella
+        else if (i != 99)
+        {
             vet[i] = num;
-        std::cout<< "hai inserito "<< num << " nella casella numero " << i << "\n";
-        }else{
-        std::cout << "hai riempito il vettore \n";
-        return 0;
+            std::cout << "hai inserito " << num << " nella casella numero " << i << "\n";
+        }
+        else
+        {
+            std::cout << "hai riempito il vettore \n";
+            return 0;
+        }
     }
 }
-}
 
-int insSceglimento(int num, int vet[]){
+int insSceglimento(int num, int vet[])
+{
 
-    //richiedo una casella da riempire
-    for(int i=0; i < 100; i++){
+    // richiedo una casella da riempire
+    for (int i = 0; i < 100; i++)
+    {
         std::cout << "inserisci la casella in cui vuoi inserire il numero (max 100), lettera per terminare \n";
         int casella;
 
-        //controllo se viene inserita una lettera o se è stata inserita una casella invalida
-        if(!(std::cin >> casella)){
+        // controllo se viene inserita una lettera o se è stata inserita una casella invalida
+        if (!(std::cin >> casella))
+        {
             std::cout << "esco dall'inserimento...\n \n";
             std::cin.clear();
             std::cin.ignore(100, '\n');
             return 0;
-        }else if(casella <0 || casella > 99){
+        }
+        else if (casella < 0 || casella > 99)
+        {
             std::cout << "casella non valida, inserisci un numero tra 0 e 100\n";
             i--;
             continue;
         }
 
-        //richiedo un numero da inserire nella casella selezionata
-        else{
-        std::cout << "inserisci il numero che vuoi inserire nella casella " << casella << "\n";
+        // richiedo un numero da inserire nella casella selezionata
+        else
+        {
+            std::cout << "inserisci il numero che vuoi inserire nella casella " << casella << "\n";
 
-        //controllo se viene inserita una lettera o uno 0 --> lo 0 è proibito
-        if(!(std::cin >> num)){
-            std::cout << "esco dall'inserimento...\n \n";
-            std::cin.clear();
-            std::cin.ignore(100, '\n');
-            return 0;
-        }
-        if(num == 0){
-            std::cout << "il numero 0 è proibito\n";
-            i--;
-            continue;
-        }
+            // controllo se viene inserita una lettera o uno 0 --> lo 0 è proibito
+            if (!(std::cin >> num))
+            {
+                std::cout << "esco dall'inserimento...\n \n";
+                std::cin.clear();
+                std::cin.ignore(100, '\n');
+                return 0;
+            }
+            if (num == 0)
+            { // <-- ?? perche? inoltre se il primo numero è 0 non funziona!
+                std::cout << "il numero 0 è proibito\n";
+                i--;
+                continue;
+            }
 
-        //confermo l'inserimento del numero nella corrispondende casella
-        vet[casella] = num;
-        std::cout << "hai inserito " << num << " nella casella numero " << casella << "\n";
+            // confermo l'inserimento del numero nella corrispondende casella
+            vet[casella] = num;
+            std::cout << "hai inserito " << num << " nella casella numero " << casella << "\n";
         }
     }
 }
 
-int opzioni(int vet[]){
+int opzioni(int vet[])
+{
 
-    //elenco le opzioni
-    std::cout << "\n Cosa vuoi fare ora? \n";
+    // elenco le opzioni
+    std::cout << "\n Cosa vuoi fare ora? \n"; // <-- ok, piu che multipli cout sarebbe piu comodo farlo in uno singolo. vedi sotto
     std::cout << "1. stampare il vettore \n";
     std::cout << "2. inserire altri numeri con sovrascrizione\n";
     std::cout << "3. inserire altri numeri senza sovrascrizione \n";
@@ -329,147 +362,187 @@ int opzioni(int vet[]){
     std::cout << "6. mettere in ordine i numeri \n";
     std::cout << "7. calcolare la somma dei numeri\n";
 
-    //richiedo un'opzione
+    /* std::cout<<"opzione 1\n"   1 singolo cout, piu comodo
+                <<"opzione 2\n"
+                <<"opzione 3"  
+    */
+    // richiedo un'opzione
     int opzione;
     std::cin >> opzione;
     return opzione;
 }
 
-void stampaVettore(int vet[]){
+void stampaVettore(int vet[])
+{
 
-    bool vuoto = true;  //variabile per verificare se il menu è vuoto
+    bool vuoto = true; // variabile per verificare se il menu è vuoto
 
-    //stampo solo le caselle che contengono numeri diversi da 0 (lo 0 indica una casella vuota)
-    for(int i = 0; i < 100; i++){
-        if(vet[i] == 0){
+    // stampo solo le caselle che contengono numeri diversi da 0 (lo 0 indica una casella vuota)
+    for (int i = 0; i < 100; i++)
+    {
+        if (vet[i] == 0)
+        {
             continue;
-        }else{
-        std::cout << "casella " << i << ": " << vet[i] << "\n";
-        vuoto = false;
+        }
+        else
+        {
+            std::cout << "casella " << i << ": " << vet[i] << "\n";
+            vuoto = false;
         }
     }
-    if(vuoto){
+    if (vuoto)
+    {
         std::cout << "\n! il menu è vuoto !\n";
     }
-
 }
 
-int EliminaNumero(int vet[]){
+int EliminaNumero(int vet[])
+{
 
-    //richiedo una casella da svuotare
-    for(int i=0; i < 100; i++){
-    std::cout << "quale casella vuoi svuotare? inserisci un numero tra 0 e 99, lettera per terminare \n";
-    int casella;
+    // richiedo una casella da svuotare
+    for (int i = 0; i < 100; i++)
+    {
+        std::cout << "quale casella vuoi svuotare? inserisci un numero tra 0 e 99, lettera per terminare \n";
+        int casella;
 
-    //controllo se viene inserita una lettera o se è stata inserita una casella invalida 
-    if(!(std::cin >> casella)){
-        std::cout << "esco dall'eliminazione...\n \n";
-        std::cin.clear(); 
-        std::cin.ignore(100, '\n');
-        return 0;
-    }else if(casella<0 || casella>99){
-        std::cout << "casella non valida, inserisci un numero tra 0 e 99\n";
-        i--;
-        continue;
-    
-    //se viene inserita una casella valida, svuoto la casella se già piena
-    }if(vet[casella] == 0){
-        std::cout << "la casella numero " << casella << " è già vuota\n";
-        i--;
-    }else{
-        vet[casella] = 0;
-        std::cout << "hai svuotato la casella numero " << casella << "\n";
+        // controllo se viene inserita una lettera o se è stata inserita una casella invalida
+        if (!(std::cin >> casella))
+        {
+            std::cout << "esco dall'eliminazione...\n \n";
+            std::cin.clear();
+            std::cin.ignore(100, '\n');
+            return 0;
+        }
+        else if (casella < 0 || casella > 99)
+        {
+            std::cout << "casella non valida, inserisci un numero tra 0 e 99\n";
+            i--;
+            continue;
+
+            // se viene inserita una casella valida, svuoto la casella se già piena
+        }
+        if (vet[casella] == 0)
+        {
+            std::cout << "la casella numero " << casella << " è già vuota\n";
+            i--;
+        }
+        else
+        {
+            vet[casella] = 0;
+            std::cout << "hai svuotato la casella numero " << casella << "\n";
+        }
     }
 }
 
-}
-
-void Media(int vet[]){
+void Media(int vet[])
+{
 
     float a = 0;
     float somma;
     float media;
     bool vuoto = true;
 
-    //sommo tutti i numeri e ne scrivo la formula
+    // sommo tutti i numeri e ne scrivo la formula
     std::cout << "\n formula della media: (";
-    for(int i = 0; i < 100; i++){
-        if(vet[i] == 0){
+    for (int i = 0; i < 100; i++)
+    {
+        if (vet[i] == 0)
+        {
             continue;
-        }else{
-        somma = somma + vet[i];
-        a++;
-        std::cout << vet[i];
+        }
+        else
+        {
+            somma = somma + vet[i];
+            a++;
+            std::cout << vet[i];
             std::cout << " + ";
-        vuoto = false;
-
+            vuoto = false;
         }
 
-    //concludo la formula e stampo la media
-    }if(vuoto == true){
+        // concludo la formula e stampo la media
+    }
+    if (vuoto == true)
+    {
         std::cout << "il menu è vuoto, non posso calcolare la media)\n";
         return;
-    }else{
-    std::cout << "0)/" << a << "\n";
-    media = somma/a;
-    std::cout << "la media è: " << media << "\n";
+    }
+    else
+    {
+        std::cout << "0)/" << a << "\n";
+        media = somma / a;
+        std::cout << "la media è: " << media << "\n";
+    }
 }
-}
 
-void BubbleSort(int vet[]){
+void BubbleSort(int vet[])
+{
 
-    //questo bubble sort mette in ordine i numeri senza cambiare la posizione delle caselle
+    // questo bubble sort mette in ordine i numeri senza cambiare la posizione delle caselle
 
-    //sposto i numeri in un'altro vettore
+    // sposto i numeri in un'altro vettore
     int b = 0;
     int slot[100];
     int bubble[100];
-    for(int i = 0; i <99; i++){
-        if(vet[i] == 0){
+    for (int i = 0; i < 99; i++)
+    {
+        if (vet[i] == 0)
+        {
             continue;
-        }else{
+        }
+        else
+        {
             bubble[b] = vet[i];
             slot[b] = i;
             b++;
         }
     }
 
-    //metto in ordine il secondo vettore
+    // metto in ordine il secondo vettore
     int temp;
     bool swapped;
-    for(int i = 0; i < b; i++){
+    for (int i = 0; i < b; i++)
+    {
         swapped = false;
-        for(int j = 0; j < b-1; j++){
-            if(bubble[j] > bubble[j+1]){
+        for (int j = 0; j < b - 1; j++)
+        {
+            if (bubble[j] > bubble[j + 1])
+            {
                 temp = bubble[j];
-                bubble[j] = bubble[j+1];
-                bubble[j+1] = temp;
+                bubble[j] = bubble[j + 1];
+                bubble[j + 1] = temp;
                 swapped = true;
             }
         }
-        if(!swapped){
+        if (!swapped)
+        {
             break;
         }
     }
 
-    //riporto i numeri ordinati nel primo vettore
-    for(int i = 0; i < b; i++){
+    // riporto i numeri ordinati nel primo vettore
+    for (int i = 0; i < b; i++)
+    {
         vet[slot[i]] = bubble[i];
     }
 }
 
-void somma(int vet[]){
+void somma(int vet[])
+{
 
     int somma1 = 0;
 
-    for(int i = 0; i < 99; i++){
+    for (int i = 0; i < 99; i++)
+    {
         somma1 += vet[i];
     }
 
-    if(somma1 == 0){
+    if (somma1 == 0)
+    {
         std::cout << "\nil menu è vuoto, non posso calcolare la somma\n";
         return;
-    }else{
+    }
+    else
+    {
         std::cout << "\n la somma dei numeri è uguale a: " << somma1 << "\n";
     }
 }
