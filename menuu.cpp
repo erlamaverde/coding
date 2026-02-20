@@ -26,7 +26,7 @@ int main(){
     //richiedo il tipo di inserimento
     int inserimento;
     inserimentoVoid();
-    TipoDiInserimento(inserimento);
+    inserimento = TipoDiInserimento(inserimento);
     //se non viene scelto un numero tra 1 e 2, l'inserimento non è valido e necessito di una nuova risposta
     
 
@@ -39,13 +39,11 @@ for(int i = 0; i < 100; i++){
 int num;
 
 //in base al tipo di inserimento, eseguo la funzione associata
-switch(inserimento){
-    case 1:
-        insOrdinato(num, vet);
-        break;
-    case 2:
-        insSceglimento(num, vet);
-        break;
+if(inserimento == 1){
+    insOrdinato(num, vet);
+}
+else if(inserimento == 2){
+    insSceglimento(num, vet);
 }
 
 //creo un ciclo per poter ritornare sempre alla lista di opzioni
@@ -58,53 +56,48 @@ switch(opzioni(vet)){
 
 
     case 2:
-
     //inserisco nuovi numeri (con sovrascrizione)
-            inserimentoVoid();
-            inserimento = TipoDiInserimento(inserimento);
+    inserimentoVoid();
+    inserimento = TipoDiInserimento(inserimento);
 
-            switch(inserimento){
-                case 1:
-                    insOrdinato(num, vet);
-                    break;
-                case 2:
-                    insSceglimento(num, vet);
-                    break;
-                }
-        break;
+        if(inserimento == 1){
+        insOrdinato(num, vet);
+        }
+        else if(inserimento == 2){
+        insSceglimento(num, vet);
+        }
+    break;
 
 
 
     case 3:
-
     //inserisco nuovi numeri (senza sovrascrizione)
-            inserimentoVoid();
-            inserimento = TipoDiInserimento(inserimento);
+    inserimentoVoid();
+    inserimento = TipoDiInserimento(inserimento);
     
-            switch(inserimento){
-                case 1:
-                    InsOrdinatoNO(num, vet);
-                    break;
-                case 2:
-                    insSceglimentoNO(num, vet);
-                    break;
-                }
-        break;
+        if(inserimento == 1){
+        InsOrdinatoNO(num, vet);
+        }
+        else if(inserimento == 2){
+        insSceglimentoNO(num, vet);
+        }
+    break;
 
 
 
     case 4:
-    
     //elimino le caselle richieste
         EliminaNumero(vet);
         break;
-    case 5:
 
+
+    case 5:
     //calcolo la media dei numeri
         Media(vet);
         break;
-    case 6:
 
+
+    case 6:
     //riordino i numeri
         BubbleSort(vet);
         
@@ -112,8 +105,8 @@ switch(opzioni(vet)){
         stampaVettore(vet);
         break;
     
-    case 7:
 
+    case 7:
     //calcolo la somma
         somma(vet);
         break;
