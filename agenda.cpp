@@ -4,7 +4,8 @@
 #include <fstream>
 #include <vector>
 #include <limits>
-
+#include <algorithm>
+#include <random>
 
 //STRUTTURE
 struct TStudente
@@ -53,7 +54,8 @@ int main()
               << "\n[2] modify person"
               << "\n[3] delete person"
               << "\n[4] sort agenda"
-              << "\n[5] visualize agenda in order\n"
+              << "\n[5] visualize agenda in order"
+              << "\n[6] shuffle agenda"
               << "\n[7] print agenda\n";
     
     int option;
@@ -88,10 +90,14 @@ int main()
             tempSort(person);
             break;
 
-        case 6:
-            //mix agenda
+        case 6: {
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::shuffle(person.begin(), person.end(), gen);
+            std::cout << "\nagenda shuffled successfully\n";
             break;
-        
+        }
+            
         case 7:
             for(int i=0; i<person.size(); i++){
                 std::cout << "\nperson " << i+1 << ":"; 
