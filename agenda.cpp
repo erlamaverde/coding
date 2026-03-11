@@ -22,6 +22,9 @@ std::ostream& operator<<(std::ostream& os, TStudente& s);
 void modifyPerson(std::vector<TStudente>& person);
 void deletePerson(std::vector<TStudente>& person);
 
+void permSort(std::vector<TStudente>& person);
+void tempSort(std::vector<TStudente>& person);
+
 //MAIN
 int main()
 {
@@ -48,7 +51,9 @@ int main()
     std::cout << "\nnow, what will you do next?"
               << "\n[1] insert people"
               << "\n[2] modify person"
-              << "\n[3] delete person\n"
+              << "\n[3] delete person"
+              << "\n[4] sort agenda"
+              << "\n[5] visualize agenda in order\n"
               << "\n[7] print agenda\n";
     
     int option;
@@ -76,11 +81,11 @@ int main()
             break;
 
         case 4:
-            //permanent sort
+            permSort(person);
             break;
         
         case 5:
-            //temporary sort
+            tempSort(person);
             break;
 
         case 6:
@@ -275,17 +280,17 @@ void deletePerson(std::vector<TStudente>& person){
                 std::cout << "invalid input, returning to menu\n";
                 return;
             }
-
+            
     }
 }
 
 //permanent sort
 void permSort(std::vector<TStudente>& person){
     std::cout << "how would you like to sort the agenda?\n"
-              << "[1] name\n"
-              << "[2] surname\n"
-              << "[3] age\n"
-              << "[4] civic\n";
+              << "[1] by name\n"
+              << "[2] by surname\n"
+              << "[3] by age\n"
+              << "[4] by civic\n";
     int choice;
     if(!(std::cin >> choice))
     {
@@ -301,17 +306,84 @@ void permSort(std::vector<TStudente>& person){
     }
     else
     {
-        //sort logic here
+        if(choice == 1)
+        {
+            bool swapped;
+
+            for(int i=0; i<person.size()-1; i++){
+                swapped = false;
+                for(int j=0; j < person.size()-i-1; j++){
+                    if(person[j].name > person[j+1].name){
+                        std::swap(person[j], person[j+1]);
+                        swapped = true;
+                    }
+                }
+                if(!swapped){
+                    break;
+                }
+            }
+        }
+        else if(choice == 2)
+        {
+            bool swapped;
+
+            for(int i=0; i<person.size()-1; i++){
+                swapped = false;
+                for(int j=0; j < person.size()-i-1; j++){
+                    if(person[j].surname > person[j+1].surname){
+                        std::swap(person[j], person[j+1]);
+                        swapped = true;
+                    }
+                }
+                if(!swapped){
+                    break;
+                }
+            }
+        }
+        else if(choice == 3)
+        {
+            bool swapped;
+
+            for(int i=0; i<person.size()-1; i++){
+                swapped = false;
+                for(int j=0; j < person.size()-i-1; j++){
+                    if(person[j].age > person[j+1].age){
+                        std::swap(person[j], person[j+1]);
+                        swapped = true;
+                    }
+                }
+                if(!swapped){
+                    break;
+                }
+            }
+        }
+        else if(choice == 4)
+        {
+            bool swapped;
+
+            for(int i=0; i<person.size()-1; i++){
+                swapped = false;
+                for(int j=0; j < person.size()-i-1; j++){
+                    if(person[j].civic > person[j+1].civic){
+                        std::swap(person[j], person[j+1]);
+                        swapped = true;
+                    }
+                }
+                if(!swapped){
+                    break;
+                }
+            }
+        }
     }
 }
 
 //temporary sort
 void tempSort(std::vector<TStudente>& person){
-    std::cout << "how would you like to sort the agenda?\n"
-              << "[1] name\n"
-              << "[2] surname\n"
-              << "[3] age\n"
-              << "[4] civic\n";
+    std::cout << "in what order would you like to sort the agenda?\n"
+              << "[1] by name\n"
+              << "[2] by surname\n"
+              << "[3] by age\n"
+              << "[4] by civic\n";
     int choice;
     if(!(std::cin >> choice))
     {
@@ -327,6 +399,82 @@ void tempSort(std::vector<TStudente>& person){
     }
     else
     {
-        //sort logic here
+        std::vector<TStudente> personSort = person;
+
+        if(choice == 1)
+        {
+            bool swapped;
+
+            for(int i=0; i<personSort.size()-1; i++){
+                swapped = false;
+                for(int j=0; j < personSort.size()-i-1; j++){
+                    if(personSort[j].name > personSort[j+1].name){
+                        std::swap(personSort[j], personSort[j+1]);
+                        swapped = true;
+                    }
+                }
+                if(!swapped){
+                    break;
+                }
+            }
+        }
+        if(choice == 2)
+        {
+            bool swapped;
+
+            for(int i=0; i<personSort.size()-1; i++){
+                swapped = false;
+                for(int j=0; j < personSort.size()-i-1; j++){
+                    if(personSort[j].surname > personSort[j+1].surname){
+                        std::swap(personSort[j], personSort[j+1]);
+                        swapped = true;
+                    }
+                }
+                if(!swapped){
+                    break;
+                }
+            }
+        }
+        if(choice == 3)
+        {
+            bool swapped;
+
+            for(int i=0; i<personSort.size()-1; i++){
+                swapped = false;
+                for(int j=0; j < personSort.size()-i-1; j++){
+                    if(personSort[j].age > personSort[j+1].age){
+                        std::swap(personSort[j], personSort[j+1]);
+                        swapped = true;
+                    }
+                }
+                if(!swapped){
+                    break;
+                }
+            }
+        }
+        if(choice == 4)
+        {
+            bool swapped;
+
+            for(int i=0; i<personSort.size()-1; i++){
+                swapped = false;
+                for(int j=0; j < personSort.size()-i-1; j++){
+                    if(personSort[j].civic > personSort[j+1].civic){
+                        std::swap(personSort[j], personSort[j+1]);
+                        swapped = true;
+                    }
+                }
+                if(!swapped){
+                    break;
+                }
+            }
+        }
+
+        for(int i=0; i<personSort.size(); i++){
+            std::cout << "\nperson " << i+1 << ":"; 
+            std::cout << personSort[i];
+            
+        }
+
     }
 }
