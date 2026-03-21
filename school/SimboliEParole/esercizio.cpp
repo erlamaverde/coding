@@ -87,7 +87,7 @@ void translate(){
 
     std::string p;
     std::vector<TLettera> tl;
-    std::cout << "Inserisci una parola: \n";
+    std::cout << "\nInserisci una parola: \n";
     getline(std::cin >> std::ws, p);
     for(int i=0; i<p.size(); i++){
     if(p[i] == 'a' || p[i] == 'e' || p[i] == 'i' || p[i] == 'o' || p[i] == 'u')
@@ -149,12 +149,47 @@ void translate(){
         continue;
     }
     else if(cont == 'y'){
-        
+        char c;
         for(int i=0; i<tl.size(); i++){
-            if(tl[i].lettera == '*'){
 
+            if(tl[i].lettera == '*')
+            {
+                if(tl[i].numero == 1){ 
+                    c = 'a';
+                }
+                if(tl[i].numero == 2){
+                    c = 'e';  
+                }
+                if(tl[i].numero == 3){
+                    c = 'i';    
+                }
+                if(tl[i].numero == 4){
+                    c = 'o';
+                }
+                if(tl[i].numero == 5){
+                    c = 'u'; }
             }
+            else if(tl[i].lettera == '?')
+            {
+                if(tl[i].numero >= 1  && tl[i].numero <= 3){
+                    c = 'a' + tl[i].numero;
+                }
+                if(tl[i].numero >= 4 && tl[i].numero <= 6){   
+                    c = 'b' + tl[i].numero;
+                }
+                if(tl[i].numero >= 7 && tl[i].numero <= 11){  
+                    c = 'c' + tl[i].numero;
+                }
+                if(tl[i].numero >= 12 && tl[i].numero <= 16){ 
+                    c = 'd' + tl[i].numero;
+                }
+                if(tl[i].numero >= 17){                       
+                    c = 'e' + tl[i].numero;
+                }
+            }
+            std::cout << c;
         }
+        std::cout << "\n";
         break;
     }
     else
@@ -163,42 +198,4 @@ void translate(){
         break;
     }
 }
-}
-
-
-//2 con scrittura {} consigliata da claude
-void translate1(){
-
-    struct TLettera{
-        char lettera;
-        int numero;
-    };
-
-    std::string p;
-    std::vector<TLettera> tl;
-    std::cout << "Inserisci una parola: \n";
-    getline(std::cin >> std::ws, p);
-    for(int i=0; i<p.size(); i++){
-    if(p[i] == 'a' || p[i] == 'e' || p[i] == 'i' || p[i] == 'o' || p[i] == 'u')
-    {   
-
-        TLettera vocale;
-        tl.push_back({'*', p[i]});
-    }
-    else if(p[i] >= 'a' && p[i] <= 'z')
-    {
-        tl.push_back({'?', p[i]});
-
-    }
-    }
-    for (int i = 0; i < tl.size(); i++) {
-    std::cout << tl[i].lettera << " " << tl[i].numero << "\n";
-}
-
-}
-
-//3 traduci dal vettore a parola
-
-void reverseTranslate(){
-
 }
