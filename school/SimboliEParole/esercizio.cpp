@@ -44,101 +44,118 @@ int main(){
 //1 scambia lettere di una stringa
 void reverse(){
     std::cout << "\ndammi una parola: \n";
-    std::string p;
-    getline(std::cin >> std::ws, p);
-    int m = p.size() / 2;
-    if(p.size() % 2 != 0){
+    std::string parola;
+    getline(std::cin >> std::ws, parola);
+    int m = parola.size() / 2;
+    if(parola.size() % 2 != 0){
         m++;
     }
 
     for(int i=0; i<m; i++){
-        std::swap(p[i], p[p.size()-1-i]);
+        std::swap(parola[i], parola[parola.size()-1-i]);
     }
-    std::cout << p << "\n";
+    std::cout << parola << "\n";
 }
 
 //1.1 scambia le lettere reciproce
 
 void unevenswitch(){
     std::cout << "\ndammi una parola: \n";
-    std::string p;
-    getline(std::cin >> std::ws, p);
-    int m = p.size() / 2;
-    if(p.size() % 2 != 0){
+    std::string parola;
+    getline(std::cin >> std::ws, parola);
+    int m = parola.size() / 2;
+    if(parola.size() % 2 != 0){
         m++;
     }
 
     for(int i=0; i<m; i++){
-        std::swap(p[i], p[p.size()-1-i]);
+        std::swap(parola[i], parola[parola.size()-1-i]);
         i++;
     }
-    std::cout << p;
-    std::cout << "\n" << p.size()/2;
+    std::cout << parola;
+    std::cout << "\n" << parola.size()/2;
 }
 
 //2 traduci una parola in un vettore di ? per consonanti e * per vocali con il rispettivo numero
 
 void translate(){
 
+    //struttura per contentere sia ?/* che il numero
     struct TLettera{
         char lettera;
         int numero;
     };
 
-    std::string p;
-    std::vector<TLettera> tl;
+    std::string parola;
+    std::vector<TLettera> vect;
+
+    //input parola
     std::cout << "\nInserisci una parola: \n";
-    getline(std::cin >> std::ws, p);
-    for(int i=0; i<p.size(); i++){
-    if(p[i] == 'a' || p[i] == 'e' || p[i] == 'i' || p[i] == 'o' || p[i] == 'u')
+    getline(std::cin >> std::ws, parola);
+
+    //ciclo per controllare ogni lettera della parola
+    for(int i=0; i<parola.size(); i++){
+    if(parola[i] == 'a' || parola[i] == 'e' || parola[i] == 'i' || parola[i] == 'o' || parola[i] == 'u') //controllo se la lettera è una vocale
     {   
 
+        //mi segno che è di categoria vocale
         TLettera vocale;
         vocale.lettera = '*';
-        if(p[i] == 'a'){
+
+        //mi segno quale vocale è
+        if(parola[i] == 'a'){
             vocale.numero = 1;
         }
-        if(p[i] == 'e'){
+        if(parola[i] == 'e'){
             vocale.numero = 2;
         }
-        if(p[i] == 'i'){
+        if(parola[i] == 'i'){
             vocale.numero = 3;
         }
-        if(p[i] == 'o'){
+        if(parola[i] == 'o'){
             vocale.numero = 4;
         }
-        if(p[i] == 'u'){
+        if(parola[i] == 'u'){
             vocale.numero = 5;
         }
 
-        tl.push_back(vocale);
+        //mi salvo la lettera tradotta nel vettore
+        vect.push_back(vocale);
     }
-    else if(p[i] >= 'a' && p[i] <= 'z')
-    {
+    else if(parola[i] >= 'a' && parola[i] <= 'z') //se non è una vocale, controllo se è una consonante
+    {   
+        //mi segno che è di categoria consonante
         TLettera consonante;
         consonante.lettera = '?';
-        if(p[i] > 'a' && p[i] < 'e'){
-            consonante.numero = p[i] - 'a';
+
+        //controllo quale consonante è
+        if(parola[i] > 'a' && parola[i] < 'e'){
+            consonante.numero = parola[i] - 'a';
         }
-        if(p[i] > 'e' && p[i] < 'i'){
-            consonante.numero = p[i] - 'a' - 1; 
+        if(parola[i] > 'e' && parola[i] < 'i'){
+            consonante.numero = parola[i] - 'b'; 
         }
-        if(p[i] > 'i' && p[i] < 'o'){
-            consonante.numero = p[i] - 'a' - 2;
+        if(parola[i] > 'i' && parola[i] < 'o'){
+            consonante.numero = parola[i] - 'c';
         }
-        if(p[i] > 'o' && p[i] < 'u'){
-            consonante.numero = p[i] - 'a' - 3;
+        if(parola[i] > 'o' && parola[i] < 'u'){
+            consonante.numero = parola[i] - 'd';
         }
-        if(p[i] > 'u'){
-            consonante.numero = p[i] - 'a' - 4;
+        if(parola[i] > 'u'){
+            consonante.numero = parola[i] - 'e';
         }
-        tl.push_back(consonante);
+
+        //mi salvo la lettera tradotta nel vettore
+        vect.push_back(consonante);
 
     }
     }
-    for (int i = 0; i < tl.size(); i++) {
-    std::cout << tl[i].lettera << " " << tl[i].numero << "\n";
-}
+
+    //stampo vettore
+    for (int i = 0; i < vect.size(); i++) {
+        std::cout << vect[i].lettera << vect[i].numero << " ";
+}   
+    //codice per ritradurre da simboli a lettere
     while(true){
     std::cout << "vuoi riscriverla come prima? [y/n]\n";
     char cont;
@@ -149,45 +166,50 @@ void translate(){
         continue;
     }
     else if(cont == 'y'){
-        char c;
-        for(int i=0; i<tl.size(); i++){
 
-            if(tl[i].lettera == '*')
+        char CharLettera;
+
+        //controllo se è una vocale o una consonante e la salvo nella variabile CharLettera
+        for(int i=0; i<vect.size(); i++){
+
+            if(vect[i].lettera == '*')
             {
-                if(tl[i].numero == 1){ 
-                    c = 'a';
+                if(vect[i].numero == 1){ 
+                    CharLettera = 'a';
                 }
-                if(tl[i].numero == 2){
-                    c = 'e';  
+                if(vect[i].numero == 2){
+                    CharLettera = 'e';  
                 }
-                if(tl[i].numero == 3){
-                    c = 'i';    
+                if(vect[i].numero == 3){
+                    CharLettera = 'i';    
                 }
-                if(tl[i].numero == 4){
-                    c = 'o';
+                if(vect[i].numero == 4){
+                    CharLettera = 'o';
                 }
-                if(tl[i].numero == 5){
-                    c = 'u'; }
+                if(vect[i].numero == 5){
+                    CharLettera = 'u'; }
             }
-            else if(tl[i].lettera == '?')
+            else if(vect[i].lettera == '?')
             {
-                if(tl[i].numero >= 1  && tl[i].numero <= 3){
-                    c = 'a' + tl[i].numero;
+                if(vect[i].numero >= 1  && vect[i].numero <= 3){
+                    CharLettera = 'a' + vect[i].numero;
                 }
-                if(tl[i].numero >= 4 && tl[i].numero <= 6){   
-                    c = 'b' + tl[i].numero;
+                if(vect[i].numero >= 4 && vect[i].numero <= 6){   
+                    CharLettera = 'b' + vect[i].numero;
                 }
-                if(tl[i].numero >= 7 && tl[i].numero <= 11){  
-                    c = 'c' + tl[i].numero;
+                if(vect[i].numero >= 7 && vect[i].numero <= 11){  
+                    CharLettera = 'c' + vect[i].numero;
                 }
-                if(tl[i].numero >= 12 && tl[i].numero <= 16){ 
-                    c = 'd' + tl[i].numero;
+                if(vect[i].numero >= 12 && vect[i].numero <= 16){ 
+                    CharLettera = 'd' + vect[i].numero;
                 }
-                if(tl[i].numero >= 17){                       
-                    c = 'e' + tl[i].numero;
+                if(vect[i].numero >= 17){                       
+                    CharLettera = 'e' + vect[i].numero;
                 }
             }
-            std::cout << c;
+
+            //stampo la parola lettera per lettera
+            std::cout << CharLettera;
         }
         std::cout << "\n";
         break;
