@@ -7,15 +7,17 @@
 void reverse();
 void unevenswitch();
 void translate();
+void frag();
 
 int main(){
 
     while(true){
     int scelta;
     std::cout << "inserisci scelta: \n"
-              << "[1] rovescia la parola\n"
-              << "[2] scambia lettere dispari della parola\n"
-              << "[3] traduci in simboli e numeri\n";
+              << "[1] rovescia la parola1\n"
+              << "[2] scambia lettere dispari della parola1\n"
+              << "[3] traduci in simboli e numeri\n"
+              << "[4] separa consonanti e vocali\n";
 
     std::cin >> scelta;
 
@@ -33,6 +35,10 @@ int main(){
         translate();
         break;
 
+        case 4:
+        frag();
+        break;
+
         default:
         std::cout << "scelta invalida \n";
         break;
@@ -43,40 +49,40 @@ int main(){
 
 //1 scambia lettere di una stringa
 void reverse(){
-    std::cout << "\ndammi una parola: \n";
-    std::string parola;
-    getline(std::cin >> std::ws, parola);
-    int m = parola.size() / 2;
-    if(parola.size() % 2 != 0){
+    std::cout << "\ndammi una parola1: \n";
+    std::string parola1;
+    getline(std::cin >> std::ws, parola1);
+    int m = parola1.size() / 2;
+    if(parola1.size() % 2 != 0){
         m++;
     }
 
     for(int i=0; i<m; i++){
-        std::swap(parola[i], parola[parola.size()-1-i]);
+        std::swap(parola1[i], parola1[parola1.size()-1-i]);
     }
-    std::cout << parola << "\n";
+    std::cout << parola1 << "\n";
 }
 
 //1.1 scambia le lettere reciproce
 
 void unevenswitch(){
-    std::cout << "\ndammi una parola: \n";
-    std::string parola;
-    getline(std::cin >> std::ws, parola);
-    int m = parola.size() / 2;
-    if(parola.size() % 2 != 0){
+    std::cout << "\ndammi una parola1: \n";
+    std::string parola1;
+    getline(std::cin >> std::ws, parola1);
+    int m = parola1.size() / 2;
+    if(parola1.size() % 2 != 0){
         m++;
     }
 
     for(int i=0; i<m; i++){
-        std::swap(parola[i], parola[parola.size()-1-i]);
+        std::swap(parola1[i], parola1[parola1.size()-1-i]);
         i++;
     }
-    std::cout << parola;
-    std::cout << "\n" << parola.size()/2;
+    std::cout << parola1;
+    std::cout << "\n" << parola1.size()/2;
 }
 
-//2 traduci una parola in un vettore di ? per consonanti e * per vocali con il rispettivo numero
+//2 traduci una parola1 in un vettore di ? per consonanti e * per vocali con il rispettivo numero
 
 void translate(){
 
@@ -86,16 +92,16 @@ void translate(){
         int numero;
     };
 
-    std::string parola;
+    std::string parola1;
     std::vector<TLettera> vect;
 
-    //input parola
-    std::cout << "\nInserisci una parola: \n";
-    getline(std::cin >> std::ws, parola);
+    //input parola1
+    std::cout << "\nInserisci una parola1: \n";
+    getline(std::cin >> std::ws, parola1);
 
-    //ciclo per controllare ogni lettera della parola
-    for(int i=0; i<parola.size(); i++){
-    if(parola[i] == 'a' || parola[i] == 'e' || parola[i] == 'i' || parola[i] == 'o' || parola[i] == 'u') //controllo se la lettera è una vocale
+    //ciclo per controllare ogni lettera della parola1
+    for(int i=0; i<parola1.size(); i++){
+    if(parola1[i] == 'a' || parola1[i] == 'e' || parola1[i] == 'i' || parola1[i] == 'o' || parola1[i] == 'u') //controllo se la lettera è una vocale
     {   
 
         //mi segno che è di categoria vocale
@@ -103,46 +109,46 @@ void translate(){
         vocale.lettera = '*';
 
         //mi segno quale vocale è
-        if(parola[i] == 'a'){
+        if(parola1[i] == 'a'){
             vocale.numero = 1;
         }
-        if(parola[i] == 'e'){
+        if(parola1[i] == 'e'){
             vocale.numero = 2;
         }
-        if(parola[i] == 'i'){
+        if(parola1[i] == 'i'){
             vocale.numero = 3;
         }
-        if(parola[i] == 'o'){
+        if(parola1[i] == 'o'){
             vocale.numero = 4;
         }
-        if(parola[i] == 'u'){
+        if(parola1[i] == 'u'){
             vocale.numero = 5;
         }
 
         //mi salvo la lettera tradotta nel vettore
         vect.push_back(vocale);
     }
-    else if(parola[i] >= 'a' && parola[i] <= 'z') //se non è una vocale, controllo se è una consonante
+    else if(parola1[i] >= 'a' && parola1[i] <= 'z') //se non è una vocale, controllo se è una consonante
     {   
         //mi segno che è di categoria consonante
         TLettera consonante;
         consonante.lettera = '?';
 
         //controllo quale consonante è
-        if(parola[i] > 'a' && parola[i] < 'e'){
-            consonante.numero = parola[i] - 'a';
+        if(parola1[i] > 'a' && parola1[i] < 'e'){
+            consonante.numero = parola1[i] - 'a';
         }
-        if(parola[i] > 'e' && parola[i] < 'i'){
-            consonante.numero = parola[i] - 'b'; 
+        if(parola1[i] > 'e' && parola1[i] < 'i'){
+            consonante.numero = parola1[i] - 'b'; 
         }
-        if(parola[i] > 'i' && parola[i] < 'o'){
-            consonante.numero = parola[i] - 'c';
+        if(parola1[i] > 'i' && parola1[i] < 'o'){
+            consonante.numero = parola1[i] - 'c';
         }
-        if(parola[i] > 'o' && parola[i] < 'u'){
-            consonante.numero = parola[i] - 'd';
+        if(parola1[i] > 'o' && parola1[i] < 'u'){
+            consonante.numero = parola1[i] - 'd';
         }
-        if(parola[i] > 'u'){
-            consonante.numero = parola[i] - 'e';
+        if(parola1[i] > 'u'){
+            consonante.numero = parola1[i] - 'e';
         }
 
         //mi salvo la lettera tradotta nel vettore
@@ -208,7 +214,7 @@ void translate(){
                 }
             }
 
-            //stampo la parola lettera per lettera
+            //stampo la parola1 lettera per lettera
             std::cout << CharLettera;
         }
         std::cout << "\n";
@@ -220,4 +226,60 @@ void translate(){
         break;
     }
 }
+}
+
+void frag(){
+
+    std::string parola1;
+    std::vector<char> vectvocali;
+    std::vector<char> vectconsonanti;
+
+    //input
+    std::cout << "dammi una parola: ";
+    getline(std::cin >> std::ws, parola1);
+
+    char vocali[] = {'a', 'e', 'i', 'o', 'u'}; //array di vocali
+
+    int num; //int per il push_back
+    char lettera; //char per il push_back
+
+    //ciclo che controlla lettera per lettera
+    for(auto p : parola1){
+
+        //check se appartiene all'alfabeto
+        if('a' <= p <= 'z' || 'A' <= p <= 'Z'){
+
+            //se appartiene all'alfabeto la inserisco nel vettore consonanti
+            lettera = p;
+            vectconsonanti.push_back(lettera);
+        }
+        
+        //ciclo che controlla se la lettera è una vocale
+        for(auto v : vocali){
+            if(p == v || p == toupper(v)){
+
+                //se è una vocale la sposto dall'array consonanti all'array vocali
+                vectconsonanti.pop_back();
+                vectvocali.push_back(lettera);
+                break;
+            }
+        }
+    }
+
+    //stampo i vettori
+    std::cout << "Consonanti: {";
+    for(int i=0; i<vectconsonanti.size(); i++){
+        std::cout << vectconsonanti[i];
+        if(i < vectconsonanti.size()-1){
+            std::cout << ", ";
+        }
+    }
+    std::cout << "}  Vocali: {";
+    for(int i=0;  i<vectvocali.size(); i++){
+        std::cout << vectvocali[i];
+        if(i < vectvocali.size()-1){
+            std::cout << ", ";
+        }
+}
+    std::cout << "}\n";
 }
