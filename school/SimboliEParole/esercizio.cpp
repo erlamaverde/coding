@@ -221,3 +221,39 @@ void translate(){
     }
 }
 }
+
+
+void frag(){
+
+
+    std::string parola;  //parola data
+    std::vector<char> vectvocali; //vettore di vocali
+    std::vector<char> vectconsonanti; //vettore di consonanti
+
+    //input
+    std::cout << "dammi una parola: \n"; 
+    getline(std::cin >> std::ws, parola);
+
+    //array delle vocali
+    char vocali[] = {'a', 'e', 'i', 'o', 'u'};
+
+    //ciclo per separare vocali e consonanti
+    for(int i=0; i<parola.size(); i++){
+        char lettera; //char per eseguire push_back
+
+        if(parola[i] == 'a' ||)
+        }
+        std::cout << "Consonanti: {";
+        for(auto i : vectconsonanti){
+            std::cout << vectconsonanti[i] << ", ";
+        }
+
+        std::cout << "}  Vocali: {";
+        for(auto i : vectvocali){
+            std::cout << vectvocali[i] << ", ";
+        }
+
+        std::cout << "}";
+    }
+
+
