@@ -14,7 +14,7 @@ int main(){
     while(true){
     int scelta;
     std::cout << "inserisci scelta: \n"
-              << "[1] rovescia la parola1\n"
+              << "[1] rovescia la parola\n"
               << "[2] scambia lettere dispari della parola1\n"
               << "[3] traduci in simboli e numeri\n"
               << "[4] separa consonanti e vocali\n";
@@ -79,7 +79,6 @@ void unevenswitch(){
         i++;
     }
     std::cout << parola1;
-    std::cout << "\n" << parola1.size()/2;
 }
 
 //2 traduci una parola1 in un vettore di ? per consonanti e * per vocali con il rispettivo numero
