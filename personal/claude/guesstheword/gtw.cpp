@@ -8,7 +8,7 @@
 
 //funzioni
 bool islonger(std::string inserimento, std::string parola);
-int extralenght(std::string inserimento, std::string parola);
+void check(std::string parola, std::string inserimento);
 
 int main(){
 
@@ -23,46 +23,84 @@ int main(){
     
     std::string parola;
     
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> dist(0, lista.size()-1);
+
+    std::random_device rd; //genero un numero casuale con rumore hardware (seed)
+    std::mt19937 gen(rd()); //uso il seed (rd) per generare un numero casuale con l'algoritmo mt19937
+    std::uniform_int_distribution<int> dist(0, lista.size()-1); //indico il range
     
+    //creo assegno il numero a un intero e lo uso per indicare quale parola sto usando
     int indice = dist(gen);
     parola = lista[indice];
 
+    //stampo la parola con solo *
     for(int i=0; i<parola.size(); i++){
         std::cout << "*";
     }
+    std::cout << " (" << parola.size() << " lettere)";
 
-    std::cout << "\n";
-    std::string inserimento;
-    std::cin >> inserimento;
+bool running = true;
 
-    if(islonger(inserimento, parola)){
-        int extra = extralenght(inserimento, parola);
+    while(running){
+
+        //richiedo un inserimento
+        std::cout << "\nindovina la parola: ";
+        std::string inserimento;
+        std::cin >> inserimento;
+
         
-    for(int i=0; i<extra; i++){
-        inserimento.pop_back();
-    }
-    }
+        switch(islonger(inserimento, parola)){
+
+            //controllo se la parola inserita è più lunga di quella del vettore
+            case true:
+            
+            std::cout << "\nhai inserito una parola da " << inserimento.size() << " lettere, troppo lunga!\n";
+            for(int i=0; i<parola.size(); i++){
+                std::cout << "*";
+            }   std::cout << "(" << parola.size() << " lettere)\n";
+
+            std::cout << "indovina la parola: ";
+            std::cin >> inserimento;
+            
+            break;
 
 
-    std::cout << parola << "\n";
-    std::cout << inserimento;
+            case false:
+            
+            check(inserimento, parola);
+            break;
+        }
+    }
+
 
 }
 
+//funzione per controllare se la parola inserita è più lunga di quella del vettore
 bool islonger(std::string inserimento, std::string parola){
-    bool a;
-    if(inserimento.size() > parola.size()){
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+
+        if(inserimento.size() > parola.size()){
+            return true;
+        }
+        else{
+            return false;
+        }
+
 }
 
-int extralenght(std::string inserimento, std::string parola){
-    return(inserimento.size() - parola.size());
+//funzione che controlla quali lettere sono uguali
+void check(std::string parola, std::string inserimento){
+    std::vector<char> output;
+
+    for(int i=0; i<parola.size(); i++){
+        output.push_back('*');
+    }
+    std::cout << "\n";
+    for(int i=0; i<parola.size(); i++){
+        if(parola[i] = inserimento[i]){
+            output[i] = inserimento[i];
+        }
+    }
+
+    for(int i=0; i<output.size(); i++){
+        std::cout << output[i];
+    }
 }
