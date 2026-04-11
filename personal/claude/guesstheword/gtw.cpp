@@ -8,8 +8,10 @@
 
 //funzioni
 bool islonger(std::string inserimento, std::string parola);
-void check(std::string parola, std::string inserimento);
+bool isshorter(std::string inserimento, std::string parola);
+void check(std::string parola, std::string inserimento, std::string& output);
 
+//main
 int main(){
 
     //non uso fstream perchè lo imparerò più avanti
@@ -36,7 +38,7 @@ int main(){
     for(int i=0; i<parola.size(); i++){
         std::cout << "*";
     }
-    std::cout << " (" << parola.size() << " lettere)";
+    std::cout << " (" << parola.size() << " lettere)\n";
 
 bool running = true;
 
@@ -56,17 +58,29 @@ bool running = true;
             std::cout << "\nhai inserito una parola da " << inserimento.size() << " lettere, troppo lunga!\n";
             for(int i=0; i<parola.size(); i++){
                 std::cout << "*";
-            }   std::cout << "(" << parola.size() << " lettere)\n";
+            }   std::cout << " (" << parola.size() << " lettere)\n";
 
-            std::cout << "indovina la parola: ";
-            std::cin >> inserimento;
-            
             break;
 
 
             case false:
             
-            check(inserimento, parola);
+            if(isshorter(inserimento, parola)){
+                int delta = parola.size() - inserimento.size();
+                for(int i=0; i<delta; i++){
+                    inserimento.push_back('*');
+                }
+            }
+            std::string output;
+
+            check(parola, inserimento, output);
+            
+            //controllo se tutte le lettere della parola sono state azzeccate, terminando il programma se è il caso
+            if( output == parola){
+                running = false;
+                std::cout << "\ncomplimenti, hai indovinato la parola!!";
+
+            }
             break;
         }
     }
@@ -86,20 +100,31 @@ bool islonger(std::string inserimento, std::string parola){
 
 }
 
-//funzione che controlla quali lettere sono uguali
-void check(std::string parola, std::string inserimento){
-    std::vector<char> output;
+bool isshorter(std::string inserimento, std::string parola){
 
-    for(int i=0; i<parola.size(); i++){
-        output.push_back('*');
+    if(inserimento.size() < parola.size()){
+        return true;
     }
+    else{
+        return false;
+    }
+
+}
+
+//funzione che controlla quali lettere sono uguali
+void check(std::string parola, std::string inserimento, std::string& output){
+
     std::cout << "\n";
+    //controllo lettera per lettera se sono uguali, salvandomi i dati sulla stringa vettore
     for(int i=0; i<parola.size(); i++){
-        if(parola[i] = inserimento[i]){
-            output[i] = inserimento[i];
+        if(inserimento[i] == parola[i]){
+            char lettera = inserimento[i];
+            output.push_back(lettera);
+        }
+        else{
+            output.push_back('*');
         }
     }
-
     for(int i=0; i<output.size(); i++){
         std::cout << output[i];
     }
