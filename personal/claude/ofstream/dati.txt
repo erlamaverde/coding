@@ -1,5 +1,0 @@
-lista di persone
-0) NOME: pietro tornaindietro, ETA: 90
- 
-1) NOME: dante alighieri, ETA: 36
- 

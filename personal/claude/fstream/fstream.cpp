@@ -15,8 +15,8 @@ std::istream& operator>>(std::istream& is, Tpersona& s);
 int main(){
 
     //ofstream con sovrascrizione
-    std::ofstream file("dati.txt");
-    file << "lista di persone\n";
+    std::ofstream fileOut("dati.txt");
+    fileOut << "lista di persone\n";
 
     std::cout << "quante persone vuoi inserire? ";
     int quantita;
@@ -27,10 +27,19 @@ int main(){
         std::cout << "(" << i+1 << " persona):\n";
         std::cin >> persona;
 
-        file << i << ") ";
-        file << "NOME: " << persona.nome << ", ETA: " << persona.eta << "\n \n";
+        fileOut << i+1 << ") ";
+        fileOut << "NOME: " << persona.nome << ", ETA: " << persona.eta << "\n \n";
         
     }
+    fileOut.close();
+
+    std::ifstream fileIn("dati.txt");
+    std::string read;
+
+    while(getline(fileIn, read)){
+        std::cout << read << "\n";
+    }
+    fileIn.close();
 }
 
 //funzioni

@@ -1,0 +1,5 @@
+lista di persone
+1) NOME: pietro, ETA: 4
+ 
+2) NOME: antonio, ETA: 46
+ 
