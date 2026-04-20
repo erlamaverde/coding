@@ -1,2 +1,0 @@
-Gioco "indovina la parola" (un po' più creativo)
-Il programma sceglie una parola a caso da un vettore, la mostra con * al posto delle lettere, e l'utente indovina lettera per lettera. 
