@@ -2,15 +2,18 @@
 #include <fstream>
 #include <string>
 
-//funzioni
-void PrintRubrica();
-
 //struct
 struct Tpersone{
     std::string nome;
     std::string cognome;
     int eta;
 };
+
+//funzioni
+void PrintRubrica();
+std::istream& operator>>(std::istream& is, Tpersone& s);
+std::ostream& operator<<(std::ostream& os, Tpersone& s);
+
 
 int main(){
 
@@ -23,11 +26,11 @@ int main(){
     bool running = true;
     while(running){
 
-        std::cout << "cosa vuoi fare?\n"
-                  << "[1] stampare la rubrica"
-                  << "[2] inserire persone"
-                  << "[3] modificare dati di una persona"
-                  << "[4] eliminare una persona";
+        std::cout << "\ncosa vuoi fare?\n"
+                  << "[1] stampare la rubrica\n"
+                  << "[2] inserire persone\n"
+                  << "[3] modificare dati di una persona\n"
+                  << "[4] eliminare una persona\n";
 
         int scelta;
         std::cin >> scelta;
@@ -39,7 +42,7 @@ int main(){
             break;
 
             case 2:
-                //InsertRubrica
+                //InsertRubricaCIUCCIA
             break;    
 
             case 3:
@@ -48,6 +51,13 @@ int main(){
 
             case 4:
                 //delete person
+            break;
+            
+            case 5:
+
+            std::cin >> persona;
+            std::cout << persona;
+
             break;
 
             default: 
@@ -74,7 +84,37 @@ void PrintRubrica(){
 }
 
 //inserisci persone
-void InsertRubrica(){
-    std::ofstream rubricaIn("rubrica.txt");
+void InsertRubrica(Tpersone persona){
+    std::ofstream rubricaIn("rubrica.txt", std::ios::app);
+    std::cin >> persona;
+    
 
+
+}
+
+//input stream
+std::istream& operator>>(std::istream& is, Tpersone& s){
+
+    std::cout << "dammi il nome: ";
+    getline(is >> std::ws, s.nome);
+
+    std::cout << "\ndammi il cognome: ";
+    getline(is >> std::ws, s.cognome);
+
+    std::cout << "\ndammi l'età: ";
+    is >> s.eta;
+
+    return is;
+
+}
+
+std::ostream& operator<<(std::ostream& os, Tpersone& s){
+
+    os << "NOME: " << s.nome;
+    
+    os << "\nCOGNOME: " << s.cognome;
+
+    os << "\nETA': " << s.eta;
+
+    return os;
 }
