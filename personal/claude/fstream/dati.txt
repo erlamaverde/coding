@@ -1,0 +1,16 @@
+lista di persone
+ 
+1) NOME: dkjn, ETA: 56
+ 
+2) NOME: dfsvjn, ETA: 6
+ 
+3) NOME: dfvsjm, ETA: 8
+ 
+4) NOME: marco, ETA: 87
+ 
+5) NOME: giovanni, ETA: 39
+ 
+6) NOME: luca, ETA: 46
+ 
+7) NOME: matteo, ETA: 8
+ 
