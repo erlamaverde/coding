@@ -13,7 +13,7 @@ struct Tpersone{
 void PrintRubrica();
 std::istream& operator>>(std::istream& is, Tpersone& s);
 std::ostream& operator<<(std::ostream& os, Tpersone& s);
-
+void InsertRubrica(Tpersone persona);
 
 int main(){
 
@@ -42,7 +42,7 @@ int main(){
             break;
 
             case 2:
-                //InsertRubricaCIUCCIA
+                InsertRubrica(persona);
             break;    
 
             case 3:
@@ -51,13 +51,6 @@ int main(){
 
             case 4:
                 //delete person
-            break;
-            
-            case 5:
-
-            std::cin >> persona;
-            std::cout << persona;
-
             break;
 
             default: 
@@ -70,9 +63,9 @@ int main(){
 
 }
 
-//funzioni
+//functions
 
-//stampa rubrica
+//print rubrica
 void PrintRubrica(){
     std::ifstream rubricaOut("rubrica.txt");
     std::string lettura;
@@ -83,13 +76,18 @@ void PrintRubrica(){
     rubricaOut.close();
 }
 
-//inserisci persone
+//insert people
 void InsertRubrica(Tpersone persona){
     std::ofstream rubricaIn("rubrica.txt", std::ios::app);
     std::cin >> persona;
     
+    rubricaIn << "1) ";
+    rubricaIn << "NOME: " << persona.nome 
+              << "COGNOME: " << persona.cognome 
+              << "ETA': " << persona.eta
+              << "\n";
 
-
+    rubricaIn.close();
 }
 
 //input stream
@@ -108,6 +106,7 @@ std::istream& operator>>(std::istream& is, Tpersone& s){
 
 }
 
+//output stream
 std::ostream& operator<<(std::ostream& os, Tpersone& s){
 
     os << "NOME: " << s.nome;
