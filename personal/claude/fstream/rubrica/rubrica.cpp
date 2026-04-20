@@ -83,8 +83,8 @@ void InsertRubrica(Tpersone persona){
     
     rubricaIn << "1) ";
     rubricaIn << "NOME: " << persona.nome 
-              << "COGNOME: " << persona.cognome 
-              << "ETA': " << persona.eta
+              << ", COGNOME: " << persona.cognome 
+              << ", ETA': " << persona.eta
               << "\n";
 
     rubricaIn.close();
