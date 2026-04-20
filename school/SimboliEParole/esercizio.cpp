@@ -247,7 +247,7 @@ void frag(){
     for(auto p : parola1){
 
         //check se appartiene all'alfabeto
-        if('a' <= p <= 'z' || 'A' <= p <= 'Z'){
+        if('a' <= p <= 'z' || 'A' <= p <= 'Z'){ 
 
             //se appartiene all'alfabeto la inserisco nel vettore consonanti
             lettera = p;
