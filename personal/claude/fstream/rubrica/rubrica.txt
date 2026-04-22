@@ -1,1 +1,2 @@
-1) NOME: GIORIOCOGNOME: ArmaniETA': 99
+1) NOME: Giorgio, COGNOME: Armani, ETA': 99
+2) NOME: Franco, COGNOME: Bollo, ETA': 1

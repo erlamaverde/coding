@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 //struct
 struct Tpersone{
@@ -13,11 +14,13 @@ struct Tpersone{
 void PrintRubrica();
 std::istream& operator>>(std::istream& is, Tpersone& s);
 std::ostream& operator<<(std::ostream& os, Tpersone& s);
-void InsertRubrica(Tpersone persona);
+void InsertRubrica(Tpersone persona, int& NumPerson);
+void deletePerson();
 
 int main(){
 
     Tpersone persona;
+    int NumPerson = 1;
 
     std::cout << "Rubrica di persone \n \n";
 
@@ -29,9 +32,8 @@ int main(){
         std::cout << "\ncosa vuoi fare?\n"
                   << "[1] stampare la rubrica\n"
                   << "[2] inserire persone\n"
-                  << "[3] modificare dati di una persona\n"
-                  << "[4] eliminare una persona\n";
-
+                  << "[3] eliminare una persona\n"
+                  << "[4] modificare dati di una persona\n";
         int scelta;
         std::cin >> scelta;
 
@@ -42,11 +44,11 @@ int main(){
             break;
 
             case 2:
-                InsertRubrica(persona);
+                InsertRubrica(persona, NumPerson);
             break;    
 
             case 3:
-                //modify person
+                deletePerson();
             break;
 
             case 4:
@@ -68,25 +70,25 @@ int main(){
 //print rubrica
 void PrintRubrica(){
     std::ifstream rubricaOut("rubrica.txt");
-    std::string lettura;
+    std::string output;
     
-    while(getline(rubricaOut, lettura)){
-        std::cout << lettura << "\n \n";
+    while(getline(rubricaOut, output)){
+        std::cout << output << "\n";
     }
     rubricaOut.close();
 }
 
 //insert people
-void InsertRubrica(Tpersone persona){
+void InsertRubrica(Tpersone persona, int& NumPerson){
     std::ofstream rubricaIn("rubrica.txt", std::ios::app);
     std::cin >> persona;
     
-    rubricaIn << "1) ";
+    rubricaIn << NumPerson << ") ";
     rubricaIn << "NOME: " << persona.nome 
               << ", COGNOME: " << persona.cognome 
               << ", ETA': " << persona.eta
               << "\n";
-
+    NumPerson++;
     rubricaIn.close();
 }
 
@@ -116,4 +118,23 @@ std::ostream& operator<<(std::ostream& os, Tpersone& s){
     os << "\nETA': " << s.eta;
 
     return os;
+}
+
+//delete person
+
+void deletePerson(){
+    std::cout << "\n chi vuoi eliminare (inserisci il numero)? \n";
+    std::ifstream fileOut("rubrica.txt");
+    std::vector<std::string> FlyingFile;
+    std::string output;
+
+    while(getline(fileOut, output)){
+        std::cout << output << "\n";
+        FlyingFile.push_back(output);
+    }
+
+    int choice;
+    std::cin >> choice;
+
+    FlyingFile.erase(choice);
 }
