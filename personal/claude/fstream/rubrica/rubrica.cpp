@@ -17,10 +17,17 @@ std::ostream& operator<<(std::ostream& os, Tpersone& s);
 void InsertRubrica(Tpersone persona, int& NumPerson);
 void deletePerson();
 
+
 int main(){
 
-    Tpersone persona;
+    std::ifstream rubricaOut("rubricaIn.txt");
     int NumPerson = 1;
+    std::string output;
+    while(getline(rubricaOut, output)){
+        NumPerson++;
+    }
+
+    Tpersone persona;
 
     std::cout << "Rubrica di persone \n \n";
 
@@ -30,7 +37,7 @@ int main(){
     while(running){
 
         std::cout << "\ncosa vuoi fare?\n"
-                  << "[1] stampare la rubrica\n"
+                  << "[1] stampare la rubricaIn\n"
                   << "[2] inserire persone\n"
                   << "[3] eliminare una persona\n"
                   << "[4] modificare dati di una persona\n";
@@ -67,9 +74,9 @@ int main(){
 
 //functions
 
-//print rubrica
+//print rubricaIn
 void PrintRubrica(){
-    std::ifstream rubricaOut("rubrica.txt");
+    std::ifstream rubricaOut("rubricaIn.txt");
     std::string output;
     
     while(getline(rubricaOut, output)){
@@ -80,7 +87,7 @@ void PrintRubrica(){
 
 //insert people
 void InsertRubrica(Tpersone persona, int& NumPerson){
-    std::ofstream rubricaIn("rubrica.txt", std::ios::app);
+    std::ofstream rubricaIn("rubricaIn.txt", std::ios::app);
     std::cin >> persona;
     
     rubricaIn << NumPerson << ") ";
@@ -124,17 +131,26 @@ std::ostream& operator<<(std::ostream& os, Tpersone& s){
 
 void deletePerson(){
     std::cout << "\n chi vuoi eliminare (inserisci il numero)? \n";
-    std::ifstream fileOut("rubrica.txt");
+    std::ifstream rubricaOut("rubrica.txt");
     std::vector<std::string> FlyingFile;
     std::string output;
 
-    while(getline(fileOut, output)){
+    while(getline(rubricaOut, output)){
         std::cout << output << "\n";
         FlyingFile.push_back(output);
     }
 
+    rubricaOut.close();
     int choice;
     std::cin >> choice;
 
-    FlyingFile.erase(choice);
+    FlyingFile[choice-1].erase();
+
+    std::ofstream rubricaIn("rubrica.txt");
+    for(int i=0; i<FlyingFile.size(); i++){
+        std::string input;
+        input = FlyingFile[i];
+        rubricaIn << input << "\n";
+    }
+    rubricaIn.close();
 }
