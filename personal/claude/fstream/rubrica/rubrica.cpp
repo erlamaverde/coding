@@ -20,7 +20,7 @@ void deletePerson();
 
 int main(){
 
-    std::ifstream rubricaOut("rubricaIn.txt");
+    std::ifstream rubricaOut("rubrica.txt");
     int NumPerson = 1;
     std::string output;
     while(getline(rubricaOut, output)){
@@ -76,7 +76,7 @@ int main(){
 
 //print rubricaIn
 void PrintRubrica(){
-    std::ifstream rubricaOut("rubricaIn.txt");
+    std::ifstream rubricaOut("rubrica.txt");
     std::string output;
     
     while(getline(rubricaOut, output)){
@@ -87,7 +87,7 @@ void PrintRubrica(){
 
 //insert people
 void InsertRubrica(Tpersone persona, int& NumPerson){
-    std::ofstream rubricaIn("rubricaIn.txt", std::ios::app);
+    std::ofstream rubricaIn("rubrica.txt", std::ios::app);
     std::cin >> persona;
     
     rubricaIn << NumPerson << ") ";
@@ -150,7 +150,7 @@ void deletePerson(){
     for(int i=0; i<FlyingFile.size(); i++){
         std::string input;
         input = FlyingFile[i];
-        rubricaIn << input << "\n";
+        rubricaIn << input << std::endl;
     }
     rubricaIn.close();
 }

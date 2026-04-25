@@ -1,3 +1,2 @@
-1) NOME: GIORGIO, COGNOME: ARMANI, ETA': 99
-
-3) NOME: CRISTIANO, COGNOME: RONALDO, ETA': 67
+1) NOME: dante, COGNOME: alighieri, ETA': 23) NOME: achille, COGNOME: lauro, ETA': 34542) NOME: francescone, COGNOME: daragonose, ETA': 4
+3) NOME: giovanni, COGNOME: s, ETA': 2
