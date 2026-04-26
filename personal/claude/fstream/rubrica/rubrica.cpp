@@ -133,11 +133,14 @@ void deletePerson(){
     std::cout << "\n chi vuoi eliminare (inserisci il numero)? \n";
     std::ifstream rubricaOut("rubrica.txt");
     std::vector<std::string> FlyingFile;
+    std::vector<std::string> Comparison;
     std::string output;
+    int count = 1;
 
     while(getline(rubricaOut, output)){
         std::cout << output << "\n";
         FlyingFile.push_back(output);
+        Comparison.push_back(output);
     }
 
     rubricaOut.close();
@@ -148,9 +151,22 @@ void deletePerson(){
 
     std::ofstream rubricaIn("rubrica.txt");
     for(int i=0; i<FlyingFile.size(); i++){
+
         std::string input;
         input = FlyingFile[i];
-        rubricaIn << input << std::endl;
+        if(FlyingFile[i] == Comparison[i]){
+            for(int j=0; j<input.size(); j++){
+                std::swap(input[j], input[input.size() - j]);
+            }
+
+            input.pop_back();
+
+            for(int j=0; j<input.size(); j++){
+                    std::swap(input[j], input[input.size() - j]);
+            }
+            rubricaIn << count << input << "\n";
+            count ++;
+        }      
     }
     rubricaIn.close();
 }
