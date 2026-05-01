@@ -37,7 +37,7 @@ int main(){
     while(running){
 
         std::cout << "\ncosa vuoi fare?\n"
-                  << "[1] stampare la rubricaIn\n"
+                  << "[1] stampare la rubrica\n"
                   << "[2] inserire persone\n"
                   << "[3] eliminare una persona\n"
                   << "[4] modificare dati di una persona\n";
@@ -74,7 +74,7 @@ int main(){
 
 //functions
 
-//print rubricaIn
+//print rubrica
 void PrintRubrica(){
     std::ifstream rubricaOut("rubrica.txt");
     std::string output;
@@ -87,6 +87,15 @@ void PrintRubrica(){
 
 //insert people
 void InsertRubrica(Tpersone persona, int& NumPerson){
+
+    std::ifstream rubricaOut("rubrica.txt");
+    NumPerson = 1;
+    std::string output;
+    while(getline(rubricaOut, output)){
+        NumPerson++;
+    }
+    rubricaOut.close();
+
     std::ofstream rubricaIn("rubrica.txt", std::ios::app);
     std::cin >> persona;
     
@@ -95,7 +104,6 @@ void InsertRubrica(Tpersone persona, int& NumPerson){
               << ", COGNOME: " << persona.cognome 
               << ", ETA': " << persona.eta
               << "\n";
-    NumPerson++;
     rubricaIn.close();
 }
 
@@ -155,18 +163,26 @@ void deletePerson(){
         std::string input;
         input = FlyingFile[i];
         if(FlyingFile[i] == Comparison[i]){
-            for(int j=0; j<input.size(); j++){
-                std::swap(input[j], input[input.size() - j]);
-            }
 
-            input.pop_back();
-
-            for(int j=0; j<input.size(); j++){
-                    std::swap(input[j], input[input.size() - j]);
-            }
+            input.erase(input.begin());
             rubricaIn << count << input << "\n";
             count ++;
+
         }      
     }
     rubricaIn.close();
+}
+
+void modifyPerson(){
+    std::cout << "\nquale persona vuoi modificare(inserisci il numero)?\n";
+    std::ifstream rubricaOut("rubrica.txt");
+    std::vector<std::string> FlyingFile;
+    std::vector<std::string> Comparison;
+    
+    std::string output;
+    while(getline(rubricaOut, output)){
+        std::cout << output << "\n";
+
+    }
+
 }
