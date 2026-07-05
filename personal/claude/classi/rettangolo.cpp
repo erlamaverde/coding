@@ -1,5 +1,6 @@
 #include <iostream>
 
+//class
 class Rettangolo{
     private:
 
@@ -31,12 +32,14 @@ class Rettangolo{
             return base;
         }
 
+        //setter for the height
         void setHeight(float h){
             if(h > 0){
                 height = h;
             }
         }
 
+        //setter for the base
         void setBase(float b){
             if(b > 0){
                 base = b;
@@ -44,6 +47,10 @@ class Rettangolo{
         }
 };
 
+//functions
+std::ostream& operator<<(std::ostream& os, Rettangolo& r);
+
+//main
 int main(){
 
     float h, b; //h: height, b: base
@@ -64,10 +71,11 @@ int main(){
 
     bool running = true;
     while(running){
-        std::cout << "\nwhat do you want to modify?"
+        std::cout << "\n \nwhat do you want to modify?"
                   << "\n1) height"
                   << "\n2) base"
-                  << "\n3) exit\n";
+                  << "\n3) exit\n"
+                  << "(" << r << ")\n";
 
         int choice;
         std::cin >> choice;
@@ -110,4 +118,11 @@ int main(){
     }
 
     return 0;
+}
+
+
+//functions
+std::ostream& operator<<(std::ostream& os, Rettangolo& r){
+    os << "height: " << r.getHeight() << ", base: " << r.getBase();
+    return os;
 }
